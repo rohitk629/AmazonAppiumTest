@@ -1,0 +1,11 @@
+<suite name="TalenCircles" verbose="1" thread-count="1" parallel="tests" configfailurepolicy="continue">  
+	 <test name="Login Test">  
+		 <classes>
+			 <class name="runner.TestRunner">  
+				 <methods>
+					 <include name="scenario"/>  
+				 </methods>
+			</class>
+		</classes>
+	</test>
+</suite>
