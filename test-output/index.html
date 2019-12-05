@@ -49,7 +49,7 @@
               <ul>
                 <li>
                   <a href="#" class="navigator-link " panel-name="test-xml-Default_suite">
-                    <span>C:\Users\rohit\AppData\Local\Temp\testng-eclipse--466041598\testng-customsuite.xml</span>
+                    <span>C:\Users\rohit\AppData\Local\Temp\testng-eclipse--1929235906\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -129,9 +129,40 @@
                   </a> <!-- runScenario("Login to amazon mobile application and search for an item and add to cart and purchase it", "Login ...) -->
                   <span class="method-name">runScenario</span>
                   <span class="parameters">("Login to amazon mobile application and search for an item and add to cart and purchase it", "Login to amazon mobile application and search for an item and add to cart and purchase it")</span>
-                  <div class="stack-trace">java.lang.NullPointerException
-	at stepDefinitions.LoginSteps.i_launch_the_amazon_app_and_landing_screen_appears(LoginSteps.java:25)
-	at ✽.I launch the amazon app and landing screen appears(src\test\java\features\AmazonScenario.feature:7)
+                  <div class="stack-trace">org.openqa.selenium.NoSuchElementException: An element could not be located on the page using the given search parameters.
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
+System info: host: &apos;DESKTOP-CIVOR0E&apos;, ip: &apos;192.168.1.2&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_221&apos;
+Driver info: io.appium.java_client.AppiumDriver
+Capabilities {app: C:\Users\rohit\eclipse-work..., appActivity: com.amazon.mShop.home.HomeA..., appPackage: com.amazon.mShop.android.sh..., autoAcceptAlerts: true, automationName: UiAutomator2, databaseEnabled: false, desired: {app: C:\Users\rohit\eclipse-work..., appActivity: com.amazon.mShop.home.HomeA..., appPackage: com.amazon.mShop.android.sh..., autoAcceptAlerts: true, automationName: UiAutomator2, deviceName: emulator-5554, newCommandTimeout: 120, noReset: true, platformName: android, platformVersion: 9.0, resetKeyboard: true, unicodeKeyboard: true}, deviceApiLevel: 28, deviceManufacturer: Google, deviceModel: AOSP on IA Emulator, deviceName: emulator-5554, deviceScreenDensity: 400, deviceScreenSize: 1080x2160, deviceUDID: emulator-5554, javascriptEnabled: true, locationContextEnabled: false, networkConnectionEnabled: true, newCommandTimeout: 120, noReset: true, pixelRatio: 2.5, platform: LINUX, platformName: LINUX, platformVersion: 9, resetKeyboard: true, statBarHeight: 60, takesScreenshot: true, unicodeKeyboard: true, viewportRect: {height: 1980, left: 0, top: 60, width: 1080}, warnings: {}, webStorageEnabled: false}
+Session ID: 873956fa-10ff-4ada-8921-27cf9f397e3e
+*** Element info: {Using=xpath, value=//android.widget.Button[contains(text(),&apos;Country/Region&apos;)]}
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:231)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at io.appium.java_client.DefaultGenericMobileDriver.execute(DefaultGenericMobileDriver.java:42)
+	at io.appium.java_client.AppiumDriver.execute(AppiumDriver.java:1)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+	at io.appium.java_client.DefaultGenericMobileDriver.findElement(DefaultGenericMobileDriver.java:62)
+	at io.appium.java_client.AppiumDriver.findElement(AppiumDriver.java:1)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+	at io.appium.java_client.DefaultGenericMobileDriver.findElementByXPath(DefaultGenericMobileDriver.java:152)
+	at io.appium.java_client.AppiumDriver.findElementByXPath(AppiumDriver.java:1)
+	at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+	at io.appium.java_client.DefaultGenericMobileDriver.findElement(DefaultGenericMobileDriver.java:58)
+	at io.appium.java_client.AppiumDriver.findElement(AppiumDriver.java:1)
+	at base.BasePage.isDisplayed(BasePage.java:263)
+	at pages.HomePage.selectCountyRegion(HomePage.java:62)
+	at stepDefinitions.HomePageSteps.i_selected_countries_regions_as_and_tap_on_Done_button_to_navigate_to_Dashboard_page(HomePageSteps.java:28)
+	at ✽.I selected countries/regions as &quot;Australia&quot; and tap on Done button to navigate to Dashboard page(src\test\java\features\AmazonScenario2.feature:13)
 
 </div> <!-- stack-trace -->
                   <em>
@@ -143,7 +174,7 @@
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\rohit\AppData\Local\Temp\testng-eclipse--466041598\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\rohit\AppData\Local\Temp\testng-eclipse--1929235906\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -204,12 +235,12 @@ data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'runScenario')
 data.setCell(0, 2, 'runner.TestRunner')
-data.setCell(0, 3, 33863);
+data.setCell(0, 3, 204323);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 33 seconds</span>
+              <span class="suite-total-time">Total running time: 3 minutes</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -244,11 +275,11 @@ return data;
                 <img src="failed.png">
                 </img>
                 <span class="method-name">runScenario("Login to amazon mobile application and search for an item and add to cart and purchase it", "Login ...)</span>
-                <span class="method-start">462 ms</span>
+                <span class="method-start">329 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDownClass</span>
-                <span class="method-start">34354 ms</span>
+                <span class="method-start">204661 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

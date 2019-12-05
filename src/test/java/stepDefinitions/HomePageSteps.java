@@ -1,7 +1,10 @@
 package stepDefinitions;
 
+import java.io.IOException;
+
 import cucumber.api.java.en.Then;
 import pages.HomePage;
+import reader.StaticProvider;
 
 public class HomePageSteps {
 
@@ -24,4 +27,5 @@ public class HomePageSteps {
 		// Write code here that turns the phrase above into concrete actions
 		home.selectCountyRegion(country);
 	}
+	
 }
