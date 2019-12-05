@@ -2,7 +2,7 @@ Feature: Login to amazon mobile application and search for an item and add to ca
 	As a user of the Amazpn app
  	I want to purchase a 65-inch TV
 
-@Required
+@scenario
 Scenario: Login to amazon mobile application and search for an item and add to cart and purchase it
 	Given I launch the amazon app and landing screen appears 
 	And I tap on Signin button and navigate to Login screen 

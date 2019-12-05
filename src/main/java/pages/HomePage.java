@@ -38,10 +38,13 @@ public class HomePage extends BasePage {
 	// Click on hamburger menu and navigate to settings page
 	public void navigateToSettingsTab() {
 		// TODO Auto-generated method stub
+		System.out.println("Inside the method");
 		if (base.isDisplayed(hamburgerMenu)) {
 			base.tapElement(hamburgerMenu);
+			System.out.println("Hamburger menu is clicked");
 			if (base.isDisplayed(settingsTab)) {
 				base.tapElement(settingsTab);
+				System.out.println("Inside the Settings ");
 			} else {
 				Assert.assertNull(base.isDisplayed(settingsTab), "Setting tab element is not visible");
 			}
