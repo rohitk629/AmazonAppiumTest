@@ -23,7 +23,7 @@ public class HomePage extends BasePage {
 
 	final String country_languages_Tab = "//android.widget.TextView[@resource-id='com.amazon.mShop.android.shopping:id/drawer_item_title'][@text='Country & Language']";
 
-	final String selectCountry_Region = "//android.widget.Button[contains(text(),'Country/Region')]";
+	final String selectCountry_Region = "//android.view.View[@resource-id='landing-countryButton']/android.view.View[1]/android.widget.Button[1]";
 
 	final String selectAustralia = "//android.widget.RadioButton[@resource-id='pref-option-group-primary-opt-0']";
 

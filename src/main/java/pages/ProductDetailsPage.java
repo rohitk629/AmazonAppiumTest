@@ -39,7 +39,6 @@ public class ProductDetailsPage extends BasePage {
 		String priceOfProduct = base.gettext(productPrice);
 		TestUtil.productPriceText = priceOfProduct;
 		
-		
 	}
 
 
