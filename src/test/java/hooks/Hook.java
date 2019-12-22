@@ -22,25 +22,48 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 
+/**
+ * @author rohit
+ *
+ */
+/**
+ * @author rohit
+ *
+ */
+/**
+ * @author rohit
+ *
+ */
+/**
+ * @author rohit
+ *
+ */
+/**
+ * @author rohit
+ *
+ */
+/**
+ * @author rohit
+ *
+ */
 public class Hook extends BasePage {
 
 	public static Properties prop;
 
 	public static DesiredCapabilities capabilities = new DesiredCapabilities();
-	
-	String prop_filePath = System.getProperty("user.dir") + "/Configuration/config.properties";
 
+	String prop_filePath = System.getProperty("user.dir") + "/Configuration/config.properties";
 
 	BasePage base;
 
 	public Hook(BasePage base) {
 		this.base = base;
 	}
-
-
+	
+	
 	@Before
 	public void initializeTest() throws MalformedURLException {
-		
+
 		try {
 			prop = new Properties();
 			FileInputStream fs = new FileInputStream(prop_filePath);
@@ -64,26 +87,25 @@ public class Hook extends BasePage {
 
 		capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, prop.getProperty("appPackage"));
 		capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, prop.getProperty("appActivity"));
-		
+
 		capabilities.setCapability("autoAcceptAlerts", true);
 		capabilities.setCapability("noReset", "true");
 		capabilities.setCapability("unicodeKeyboard", true);
 		capabilities.setCapability("resetKeyboard", true);
-		
+
 		try {
 			driver = new AppiumDriver<MobileElement>(new URL(prop.getProperty("URL_Capability")), capabilities);
 //			wait = new WebDriverWait(this.driver, 30);
 			driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
 
 		} catch (MalformedURLException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
 	@After
 	public void tearDown(Scenario scenario) {
 		if (scenario.isFailed()) {
-			System.out.println("Scenario Failed");
 			base.takeScreenShot(scenario.getName());
 		}
 		base.resetApp();

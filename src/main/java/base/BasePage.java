@@ -4,26 +4,19 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.Keyboard;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,23 +33,29 @@ import io.appium.java_client.touch.offset.PointOption;
 public class BasePage {
 
 	protected static AppiumDriver<MobileElement> driver;
-	
+
 	public Properties prop;
-	
+
 	protected String backButton = "//android.widget.ImageButton[@content-desc = 'Navigate up']";
 
 	protected static WebDriverWait wait;
-	
+
 	public BasePage() {
 		this.driver = driver;
-//		this.wait = new WebDriverWait(driver, DRIVER_WAIT_TIME);
 	}
-	
+
+	/**
+	 * To reset the app after completion of a scenario
+	 */
 	public void resetApp() {
-		driver.resetApp();
-		System.out.println("Resetting the app");
-		wait = new WebDriverWait(driver, 30);
+		try {
+			driver.resetApp();
+			wait = new WebDriverWait(driver, 30);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+
 	/**
 	 * Close the app which was provided in the capabilities at session creation
 	 */
@@ -69,17 +68,20 @@ public class BasePage {
 	}
 
 	/**
-	 * Runs the current app as a background app for the number of seconds
-	 *            Number of seconds to run App in background
+	 * Runs the current app as a background app for the number of seconds Number of
+	 * seconds to run App in background
 	 */
-	public void runAppInBackground(Duration seconds){
-		driver.runAppInBackground(seconds);
+	public void runAppInBackground(Duration seconds) {
+		try {
+			driver.runAppInBackground(seconds);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-
-
-	/**To hide the keyboard
-	 * in the app**/
+	/**
+	 * To hide the keyboard in the app
+	 **/
 	public void hideKeyboard() {
 		try {
 			driver.hideKeyboard();
@@ -88,53 +90,35 @@ public class BasePage {
 		}
 	}
 
-	public boolean isAlertPresent(){
-		boolean foundAlert = false;
-		new WebDriverWait(driver, 10);
-		try {
-			wait.until(ExpectedConditions.alertIsPresent());
-			foundAlert = true;
-		} catch (TimeoutException eTO) {
-			foundAlert = false;
-		}
-		return foundAlert;
-	}
-
-	//To verify if keypad is open
-	public boolean isKeyBoardOpen(){
+	// To verify if keypad is open
+	public boolean isKeyBoardOpen() {
 		Keyboard Element = driver.getKeyboard();
 		boolean isOpen = false;
-		if(Element != null){
-			isOpen = true;
+		try {
+			if (Element != null) {
+				isOpen = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return isOpen;
 	}
 
-	/**Long press on a element
-	 * to view sub-options**/
-	public void longPress(LongPressOptions element){
+	/**
+	 * Long press on a element to view sub-options
+	 **/
+	public void longPress(LongPressOptions element) {
 		TouchAction action = new TouchAction(driver);
-		action.longPress(element).release().perform();
+		try {
+			action.longPress(element).release().perform();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-
-
-
-	public void tapElementJsExec(String element){
-
-		MobileElement ele = driver.findElement(By.xpath(element));
-		Point p = ele.getLocation();
-		Dimension size = ele.getSize();
-		double x = p.getX() + size.getWidth() / 2.0;
-		double y = p.getY() + size.getHeight() / 2.0;
-		HashMap<String , Double> point = new HashMap<String , Double>();
-		point.put("x" , x);
-		point.put("y" , y);
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("mobile: tap", point);
-	}
-
-
+	/**
+	 * TO allow the permission pop-up
+	 **/
 	public boolean allowPermissionPopup() {
 		WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
 		try {
@@ -152,10 +136,13 @@ public class BasePage {
 
 	public void tapOnBackButton() {
 		MobileElement ele = driver.findElement(By.xpath(backButton));
-		waitForElementToBeClickable(ele);
-		ele.click();
+		try {
+			waitForElementToBeClickable(ele);
+			ele.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-
 
 	/**
 	 * Takes snapshot
@@ -183,8 +170,12 @@ public class BasePage {
 	public boolean isSelected(String xpath) {
 		MobileElement element = driver.findElement(By.xpath(xpath));
 		boolean isSelected = false;
-		if (element != null) {
-			isSelected = element.isSelected();
+		try {
+			if (element != null) {
+				isSelected = element.isSelected();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return isSelected;
 	}
@@ -192,15 +183,18 @@ public class BasePage {
 	/**
 	 * To Get the selected value from the dropdown
 	 * 
-	 * @param browser browser instance
 	 * @param element
 	 * @return
 	 */
 	public String getDropdownValue(String element) {
 		String selectedOption = null;
 		WebElement option = driver.findElement(By.xpath(element));
-		if (option != null) {
-			selectedOption = new Select(option).getFirstSelectedOption().getText();
+		try {
+			if (option != null) {
+				selectedOption = new Select(option).getFirstSelectedOption().getText();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return selectedOption;
 	}
@@ -209,41 +203,65 @@ public class BasePage {
 	 * To Delete Cookies before loging into the Application
 	 */
 	public void deleteCookies() {
-		driver.manage().deleteAllCookies();
-		System.out.println("Deleted all cookies before login to the application");
+		try {
+			driver.manage().deleteAllCookies();
+		} catch (Exception e) {
+			Assert.fail("Not able to delete cookies");
+		}
 	}
 
 	/**
 	 *
-	 * @param locator locator of the element(ie., id/xpath/....)
+	 * @param locator locator of the element(ie.xpath)
 	 * @param element element on the page
-	 * @return PageName
 	 */
 	public String gettext(String element) {
 		String text = null;
 		WebElement Element = driver.findElement(By.xpath(element));
-		if (Element != null) {
-			text = Element.getText();
+		try {
+			if (Element != null) {
+				text = Element.getText();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return text;
 	}
 
-	// To get text based on attribute(EX: id,src, value...)
+	/**
+	 * To get text based on attribute(EX: id,src, value...) *
+	 * 
+	 * @param element   locator of the element(ie.xpath)
+	 * @param attribute element on the page
+	 */
 	public String gettext(String element, String attribute) {
 		String value = null;
 		WebElement Element = driver.findElement(By.xpath(element));
-		if (Element != null) {
-			value = Element.getAttribute(attribute);
+		try {
+			if (Element != null) {
+				value = Element.getAttribute(attribute);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return value;
 	}
 
-	// To get text based on attribute(EX: id,src, value...)
+	/**
+	 * To get text based on attribute(EX: id,src, value...)
+	 * 
+	 * @param element   WebElement of locator
+	 * @param attribute element on the page
+	 */
 	public String gettexts(WebElement element, String attribute) {
 		String value = null;
 		// WebElement Element = getElement(XPATH, element)
-		if (element != null) {
-			value = element.getAttribute(attribute);
+		try {
+			if (element != null) {
+				value = element.getAttribute(attribute);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return value;
 	}
@@ -252,8 +270,12 @@ public class BasePage {
 	public boolean checkEnabled(String Xpath) {
 		WebElement element = driver.findElement(By.xpath(Xpath));
 		boolean isEnabled = false;
-		if (element != null) {
-			isEnabled = element.isEnabled();
+		try {
+			if (element != null) {
+				isEnabled = element.isEnabled();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return isEnabled;
 	}
@@ -262,8 +284,12 @@ public class BasePage {
 	public boolean isDisplayed(String Xpath) {
 		WebElement element = driver.findElement(By.xpath(Xpath));
 		boolean isDisplayed = false;
-		if (element != null) {
-			isDisplayed = element.isDisplayed();
+		try {
+			if (element != null) {
+				isDisplayed = element.isDisplayed();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return isDisplayed;
 	}
@@ -290,34 +316,53 @@ public class BasePage {
 		return list;
 	}
 
-	// To get all elements from the list
+	/**
+	 * To get all elements from the list
+	 * 
+	 * @param String xpath
+	 */
 	public List<MobileElement> getListElements(String element) {
-		List<MobileElement> elementList = driver.findElements(By.xpath(element));
+
+		List<MobileElement> elementList = null;
+		try {
+			elementList = driver.findElements(By.xpath(element));
 //		waitForElementToBeClickable(elementList.get(0));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return elementList;
 	}
-	
-	
-	// Scroll and Click an element
-	public void scrollAndClickAnElement(String xpathValue){
-		
+
+	/**
+	 * Scroll and Click an element
+	 * 
+	 * @param String xpath
+	 */
+	public void scrollAndClickAnElement(String xpathValue) {
+
 		MobileElement mobElement = driver.findElement(MobileBy.xpath(xpathValue));
-		Point point = mobElement.getLocation();
-		int startY = point.y;
-		int endY = point.y;
+		try {
+			if (mobElement != null) {
+				Point point = mobElement.getLocation();
+				int startY = point.y;
+				int endY = point.y;
 
-		int startX = (int) ((driver.manage().window().getSize().getWidth()) * 0.80);
-		driver.manage().window().getSize().getWidth();
-
-		new TouchAction(driver).press(PointOption.point(startX, startY)).waitAction().moveTo(PointOption.point(startX, endY)).release().perform();
+				int startX = (int) ((driver.manage().window().getSize().getWidth()) * 0.80);
+				driver.manage().window().getSize().getWidth();
+				new TouchAction(driver).press(PointOption.point(startX, startY)).waitAction()
+						.moveTo(PointOption.point(startX, endY)).release().perform();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	/**
 	 * Selects from drop down based on value
 	 * 
-	 * @param String
-	 * @param String
+	 * @param String xpath
+	 * @param String value of the text
 	 */
 	public void selectDropdownValue(String element, String value) {
 
@@ -341,136 +386,86 @@ public class BasePage {
 				clickThis.selectByVisibleText(value);
 			}
 		} catch (NoSuchElementException e) {
-			System.out.println("Unable to select list item from the dropdown");
+			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * To select through index from a dropdown
+	 * To select through index from a dropdown*
+	 * 
+	 * @param String  xpath
+	 * @param Integer index of the element to be selected
 	 */
 	public void selectOptionFromDropdown(String element, int indexvalue) {
 		WebElement mySelectElm = driver.findElement(By.xpath(element));
-		Select mySelect = new Select(mySelectElm);
-		mySelect.selectByIndex(indexvalue);
+		try {
+			if (mySelectElm != null) {
+				Select mySelect = new Select(mySelectElm);
+				mySelect.selectByIndex(indexvalue);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
+	/**
+	 * To Change the xpath into WebElement *
+	 * 
+	 * @param String xpath of the element
+	 */
 	public MobileElement getElement(String Xpath) {
 		MobileElement element = driver.findElement(By.xpath(Xpath));
-		System.out.println("ele:: "+element);
 		return element;
 
 	}
 
+	/**
+	 * To enter the data into a text field*
+	 * 
+	 * @param element xpath (String) of the element
+	 * @param text    String value of data to enter
+	 */
 	public void populateFields(String element, String text) {
 		WebElement elem = driver.findElement(By.xpath(element));
-		waitForElementToBeClickable(elem);
-		elem.click();
-		if (text != null) {
-			if (!elem.getText().isEmpty()) {
-				elem.clear();
+		try {
+			if (elem != null) {
+				waitForElementToBeClickable(elem);
+				elem.click();
+				if (text != null) {
+					if (!elem.getText().isEmpty()) {
+						elem.clear();
+					}
+					elem.sendKeys(text);
+				} else {
+					Assert.assertNotNull(elem.getText());
+				}
 			}
-			elem.sendKeys(text);
-		} else {
-			Assert.assertNotNull(elem.getText());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+
 	}
 
+	/**
+	 * To tap on the element *
+	 * 
+	 * @param element xpath (String) of the element
+	 */
 	public void tapElement(String element) {
 		MobileElement ele = driver.findElement(By.xpath(element));
-		waitForElementToBeClickable(ele);
-		driver.findElement(By.xpath(element)).click();
-	}
-
-	// To click an element
-	public void tapMobileElement(WebElement element) {
-		waitForElementToBeClickable(element);
-		element.click();
-	}
-
-	public void waitForElementToBeVisible(By by) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-	}
-
-	public void waitForElementToBeVisible(By by, int timeout) {
-		wait = new WebDriverWait(driver, timeout);
 		try {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+			if (ele != null) {
+				waitForElementToBeClickable(ele);
+				driver.findElement(By.xpath(element)).click();
+			}
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
-	}
-
-	public WebElement waitForElementToBeVisible(WebElement element) {
-		wait = new WebDriverWait(driver, 30);
-		return wait.until(ExpectedConditions.visibilityOf(element));
 	}
 
 	public void waitForElementToBeClickable(WebElement element) {
 		wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
-
-	public void waitForElementToBeSelected(WebElement element) {
-		wait.until(ExpectedConditions.elementSelectionStateToBe(element, true));
-	}
-
-	public void waitForElementToBeRefreshed(WebElement element) {
-		wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(element)));
-	}
-
-	public void waitForElementToBeRefreshed(By by) {
-		wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(by)));
-	}
-
-	public void waitForElementToBeClickable(By by) {
-		wait.until(ExpectedConditions.elementToBeClickable(by));
-	}
-
-	public WebElement waitForPresenceOfElement(By by) {
-		return wait.until(ExpectedConditions.presenceOfElementLocated(by));
-	}
-
-	public void waitForPresenceOfAllElements(By by) {
-		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
-	}
-
-	public void waitForInvisibilityOfElementByText(By by, String text) {
-		wait.until(ExpectedConditions.invisibilityOfElementWithText(by, text));
-	}
-
-	public void waitForElementToBeInvisible(By by) {
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
-	}
-
-	public void waitForElementToBeChecked(WebElement element) {
-		wait.until(elementToBeChecked(element));
-	}
-
-	private ExpectedCondition<WebElement> elementToBeChecked(final WebElement element) {
-		return new ExpectedCondition<WebElement>() {
-
-			public ExpectedCondition<WebElement> visibilityOfElement = ExpectedConditions.visibilityOf(element);
-
-			public WebElement apply(WebDriver driver) {
-				WebElement element = visibilityOfElement.apply(driver);
-				try {
-					if (element != null && element.getAttribute("checked").equals("true")) {
-						return element;
-					} else {
-						return null;
-					}
-				} catch (StaleElementReferenceException e) {
-					return null;
-				}
-			}
-
-			@Override
-			public String toString() {
-				return "element to be checked : " + element;
-			}
-		};
-	}
-
-
 
 }

@@ -31,8 +31,6 @@ public class LoginPage extends BasePage {
 
 	// Validate if Amazon logo and Sign In buttons are displayed on Landing Page
 	public void verifyLandingScreen() {
-		// TODO Auto-generated method stub
-		System.out.println("Driver is ::: " + driver);
 		Assert.assertTrue(base.isDisplayed(splashAmazonLogo));
 		Assert.assertTrue(base.isDisplayed(signInBtn));
 
@@ -40,7 +38,6 @@ public class LoginPage extends BasePage {
 
 	// To click on a button 'Already a customer? Sign in'
 	public void clickSignInBtn() {
-		// TODO Auto-generated method stub
 		if (base.isDisplayed(signInBtn)) {
 			base.tapElement(signInBtn);
 		} else {
@@ -50,7 +47,6 @@ public class LoginPage extends BasePage {
 
 	// To enter the excel data into email and password fields
 	public void populateLoginFields(String[][] formData) {
-		// TODO Auto-generated method stub
 
 		// Check if login radio button is selected, if not then click on the radio button
 		if (!base.isSelected(loginRadioButton)) {
@@ -69,8 +65,6 @@ public class LoginPage extends BasePage {
 
 	// Click Submit button
 	public void clickSubmitButton() {
-		// TODO Auto-generated method stub
-		System.out.println("Inside submit button");
 		if (base.isDisplayed(submitButton)) {
 			base.tapElement(submitButton);
 		} else {

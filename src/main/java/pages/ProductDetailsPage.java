@@ -7,9 +7,7 @@ import util.TestUtil;
 
 public class ProductDetailsPage extends BasePage {
 	
-	static BasePage base = new BasePage();
-	
-	
+	static BasePage base = new BasePage();	
 	
 	
 	final String productName = "//android.view.View[@resource-id='title']";
@@ -21,9 +19,8 @@ public class ProductDetailsPage extends BasePage {
 	final String addToCart = "//android.widget.Button[@resource-id='add_to_cart/rs_cart']";
 	
 	
-
+	// To store the details such as name and price of the product into global variables
 	public void storeProductDetails() {
-		// TODO Auto-generated method stub
 		
 		//Storing the name of product into a global variable
 		String nameOfProduct = base.gettext(productName);
@@ -42,9 +39,8 @@ public class ProductDetailsPage extends BasePage {
 	}
 
 
-
+	// Adding the product into the cart
 	public void addProductToCart() {
-		// TODO Auto-generated method stub
 		if(base.isDisplayed(addToCart)) {
 			base.tapElement(addToCart);
 		} else {

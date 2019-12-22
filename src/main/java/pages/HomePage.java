@@ -29,23 +29,19 @@ public class HomePage extends BasePage {
 
 	final String doneButton = "//android.widget.Button[@text='Done']";
 
-	// Actions:
+
 	// Method to verify logo on Home page of application
 	public void verifyHomePageLogo() {
-		Assert.assertTrue(base.isDisplayed(homePageLogo));
-		Assert.assertTrue(base.isDisplayed(hamburgerMenu));
+		Assert.assertTrue(base.isDisplayed(homePageLogo), "Amazon logo is displayed in the Home Page");
+		Assert.assertTrue(base.isDisplayed(hamburgerMenu), "Hamburger menu is displayed in the Home Page");
 	}
 
 	// Click on hamburger menu and navigate to settings page
 	public void navigateToSettingsTab() {
-		// TODO Auto-generated method stub
-		System.out.println("Inside the method");
 		if (base.isDisplayed(hamburgerMenu)) {
 			base.tapElement(hamburgerMenu);
-			System.out.println("Hamburger menu is clicked");
 			if (base.isDisplayed(settingsTab)) {
 				base.tapElement(settingsTab);
-				System.out.println("Inside the Settings ");
 			} else {
 				Assert.assertNull(base.isDisplayed(settingsTab), "Setting tab element is not visible");
 			}
@@ -56,7 +52,6 @@ public class HomePage extends BasePage {
 
 	// Select Australia as a country
 	public void selectCountyRegion(String country) {
-		// TODO Auto-generated method stub
 		if (base.isDisplayed(country_languages_Tab)) {
 			base.tapElement(country_languages_Tab);
 			if (base.isDisplayed(selectCountry_Region)) {

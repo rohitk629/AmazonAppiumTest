@@ -16,8 +16,6 @@ public class LoginSteps {
 
 	@Given("I launch the amazon app and landing screen appears")
 	public void i_launch_the_amazon_app_and_landing_screen_appears() throws IOException  {
-	    // Write code here that turns the phrase above into concrete actions
-		System.out.println("Login Steps");
 		login.verifyLandingScreen();
 	}
 	
@@ -29,15 +27,12 @@ public class LoginSteps {
 
 	@Given("I enter valid login credentials from excel sheetname {string}")
 	public void i_enter_valid_login_credentials_from_excel_sheetname(String testData) throws IOException {
-		// Write code here that turns the phrase above into concrete actions
 		String[][] formData =  StaticProvider.getExcelData(testData);  // Passing testData as "Login_Success" from feature file
 		login.populateLoginFields(formData);
 	}
 
 	@When("I tap on submit button")
 	public void i_tap_on_submit_button() {
-		// Write code here that turns the phrase above into concrete actions
-		System.out.println("3rd step");
 		login.clickSubmitButton();
 	}
 
