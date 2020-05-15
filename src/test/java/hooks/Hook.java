@@ -26,26 +26,7 @@ import io.appium.java_client.remote.MobileCapabilityType;
  * @author rohit
  *
  */
-/**
- * @author rohit
- *
- */
-/**
- * @author rohit
- *
- */
-/**
- * @author rohit
- *
- */
-/**
- * @author rohit
- *
- */
-/**
- * @author rohit
- *
- */
+
 public class Hook extends BasePage {
 
 	public static Properties prop;
